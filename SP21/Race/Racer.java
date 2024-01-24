@@ -1,7 +1,5 @@
 package Race;
 
-import java.util.Scanner;
-
 /* Fany Manevich 206116725
  * Dmitri podoluk 317059244
  * 
@@ -9,52 +7,55 @@ import java.util.Scanner;
 
 public class Racer implements Runnable{
 	
-	private static int globalId;
+	private static int globalId = 1;
 	private int id;
 	private int speed;
 	private int distanse;
-	public Track trackdistanse;
-	public FinishLine finish;
+	public Track track;
 	
-	//-------Get&Set----------
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	
-	//------Functions-------
 	public Racer(int speed, Track track) {
 		
-		globalId = 1;
 		id = globalId;
+		globalId ++;
+		distanse = 1;
 		
 		if(speed < 1 || speed > 10) {
 			System.out.println("Wrong speed");
+		}else {
+			this.speed = speed;
 		}
 		
 		track = new Track(); 
 	}
 	
-	public void go() {
+	public void go() throws InterruptedException {
 		
-		while( distanse > 0) {
+		while( distanse > 0 && distanse < 100){
 			try{
 				Thread.currentThread();
 				Thread.sleep(1000);
 			} catch(InterruptedException e) {}
-					
+			
+			if( distanse < 100) {
+				
+				distanse += speed;
+			}
+			
+			
 			System.out.printf("Runner  %d ran  %d meters \n", id, distanse);
-		
+			
 			if(distanse == 100 ) {
 			
 				System.out.printf("Runner  %d ran  100 meters \n", id);
-				finish.Finished(this);
+				track.Finished(this);
 				
 			}
+			
 		}
 		
 		
@@ -62,6 +63,12 @@ public class Racer implements Runnable{
 	
 	public void run() {
 	
+		Thread.currentThread().setPriority(this.speed);
+		try {
+			go();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

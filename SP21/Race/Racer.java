@@ -23,14 +23,14 @@ public class Racer implements Runnable{
 		id = globalId;
 		globalId ++;
 		distanse = 1;
-		
+
 		if(speed < 1 || speed > 10) {
 			System.out.println("Wrong speed");
 		}else {
 			this.speed = speed;
 		}
 		
-		track = new Track(); 
+		this.track = track;
 	}
 	
 	public void go() throws InterruptedException {
@@ -39,26 +39,24 @@ public class Racer implements Runnable{
 			try{
 				Thread.currentThread();
 				Thread.sleep(1000);
-			} catch(InterruptedException e) {}
-			
-			if( distanse < 100) {
 				
-				distanse += speed;
-			}
-			
-			
-			System.out.printf("Runner  %d ran  %d meters \n", id, distanse);
-			
-			if(distanse == 100 ) {
-			
-				System.out.printf("Runner  %d ran  100 meters \n", id);
-				track.Finished(this);
+				if( distanse < 100) {
+					
+					distanse += speed;
+				}
 				
-			}
-			
+				
+				System.out.printf("Runner  %d ran  %d meters \n", id, distanse);
+				
+				if(distanse >= 100 ) {
+				
+					System.out.printf("Runner  %d ran  100 meters \n", id);
+					track.Finished(this);
+					
+				}
+				
+			} catch(InterruptedException e) {}	
 		}
-		
-		
 	}
 	
 	public void run() {

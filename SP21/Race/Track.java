@@ -5,7 +5,11 @@ package Race;
  */
 public class Track {
 
-	int finishedRacers = 0;
+	int finishedRacers;
+	
+	public Track() {
+		this.finishedRacers = 0;
+	}
 	
 	public synchronized void Finished(Racer racer) {
 		
@@ -13,15 +17,15 @@ public class Track {
 		
 		switch(finishedRacers) {
 			case 1:
-				System.out.printf("Runner %s finished %d st! \n", racer.getId());
+				System.out.printf("Runner %s finished %d st! \n", racer.getId(), finishedRacers);
 				break;
 				
 			case 2:
-				System.out.printf("Runner %s finished %d nd! \n", racer.getId());
+				System.out.printf("Runner %s finished %d nd! \n", racer.getId(), finishedRacers);
 				break;
 				
 			case 3:
-				System.out.printf("Runner %s finished %d rd! \n", racer.getId());
+				System.out.printf("Runner %s finished %d rd! \n", racer.getId(), finishedRacers);
 				break;
 			
 			default:

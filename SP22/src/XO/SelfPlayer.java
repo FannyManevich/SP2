@@ -8,27 +8,14 @@ import java.util.Random;
  */
 
 public class SelfPlayer extends Player implements Runnable  {
-
-	PlayerType nextTurn, selfTurn;
+	
 	public SelfGame selfGame;
-	PlayerType[][] gameBoard;
+	PlayerType nextTurn;
+	Coordinates[] empty;
 	
-	public SelfPlayer(String name, PlayerType selfTurn) {
-		super(name, selfTurn);
-		gameBoard = selfGame.getGameBoard();
-		
-		
-	}
-	
-	public void setCell(int randomRow, int randomCol, PlayerType turn) {
-	
-		if ( gameBoard[randomRow][randomCol] == PlayerType.FREE) {
-				this.gameBoard[randomRow][randomCol] = turn;
-			if ( selfGame.getTurn() == selfTurn) {
-				
-			}
-				
-		}
+	public SelfPlayer(String name, PlayerType playerSymbol) {
+		super(name, playerSymbol);	
+		empty = selfGame.getFreeCells();
 	}
 	
 	public void run(){
@@ -41,9 +28,16 @@ public class SelfPlayer extends Player implements Runnable  {
 			try {
 				Thread.sleep(500);
 				
-				randomRow = random.nextInt(5);
-				randomCol = random.nextInt(5);
-				setCell(randomRow,randomCol,this.turn);
+				if(this.getPlayerSymbol() == selfGame.getTurn()) {
+					randomRow = random.nextInt(5);
+					randomCol = random.nextInt(5);
+					selfGame.setCell(randomRow,randomCol,this.playerSymbol, empty);
+					
+					if ( selfGame.getTurn() == PlayerType.X )
+						nextTurn = PlayerType.O;
+					else nextTurn = PlayerType.X;
+				
+				}
 				
 				selfGame.printBoard();
 				

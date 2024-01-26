@@ -6,7 +6,7 @@ package XO;
 public abstract class Player {
 
 	private String name;
-	public PlayerType turn;
+	public PlayerType playerSymbol;
 
 	public String getName() {
 		return name;
@@ -16,17 +16,17 @@ public abstract class Player {
 		this.name = name;
 	}
 
-	public PlayerType getTurn() {
-		return turn;
+	public PlayerType getPlayerSymbol() {
+		return playerSymbol;
 	}
 
-	public void setTurn(PlayerType turn) {
-		this.turn = turn;
+	public void setPlayerSymbol(PlayerType playerSymbol) {
+		this.playerSymbol = playerSymbol;
 	}
 	
-	public Player(String name, PlayerType turn) {
+	public Player(String name, PlayerType playerSymbol) {
 		
 		this.name = name;
-		this.turn = turn;
+		this.playerSymbol = playerSymbol;
 	}
 }

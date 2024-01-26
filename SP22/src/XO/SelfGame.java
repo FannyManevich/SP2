@@ -7,36 +7,18 @@ package XO;
 
 public class SelfGame extends Game{
 
-	private SelfPlayer player1, player2;
 	PlayerType[][] gameBoard;
-	PlayerType nextTurn;
-	
-	public SelfPlayer getPlayer() {
-		return player1;
-	}
-
-	public void setPlayer(SelfPlayer player) {
-		this.player1 = player;
-	}
-
-	public PlayerType[][] getGameBoard() {
-		return gameBoard;
-	}
+	PlayerType thisTurn,nextTurn;
+	private SelfPlayer player1, player2;
 
 	public SelfGame(SelfPlayer player1, SelfPlayer player2) {
 		this.player1 = player1;
 		this.player2 = player2;
-		gameBoard = new PlayerType[5][5];
-		resetBoard();
-		
+		thisTurn = player1.playerSymbol;
 	}
 
 	public PlayerType getTurn() {
-		if ( player1.getTurn() == PlayerType.X )
-			nextTurn = PlayerType.O;
-		else nextTurn = PlayerType.X;
-		
-		return nextTurn;
+		return thisTurn;
 	}
 	
 	public void printBoard() {
@@ -80,7 +62,7 @@ public class SelfGame extends Game{
 	public boolean CheckLeftDiagonal() {
 		int count = 0;
 		for (int i = 0; i < 5; i ++) {
-			if ( gameBoard[i][i] == player1.getTurn() || gameBoard[i][i] == player2.getTurn()) {
+			if ( gameBoard[i][i] == getTurn() || gameBoard[i][i] == player2.getPlayerSymbol()) {
 				count ++;
 			}
 		}
@@ -90,30 +72,33 @@ public class SelfGame extends Game{
 		else return false;
 	}
 	public PlayerType CheckRightDiagonal() {
-		int count1, count2 = 0;
+		int count = 0;
 		for (int i = 0; i < 5; i ++) {
 			for (int j = 4; j >= 0; j --) {
-				if ( gameBoard[i][i] == player1.getTurn() ) {
-					count1 ++;
-				}
-				if ( gameBoard[i][i] == player2.getTurn() ) {
-					count2 ++;
+				if ( gameBoard[i][i] == player1.getPlayerSymbol() ) {
+					count ++;
 				}
 		}
 		}
-		if( count1 == 5) {
-			return player1.getTurn();
+		if( count == 5) {
+			return player1.getPlayerSymbol() ;
 		}
-		else return false;
+		else return player1.getPlayerSymbol() ;
 	}
 
-	public boolean CheckRow() {
+	public PlayerType CheckRow() {
 		int count = 0;
 		
 		for (int i = 0; i < 5; i ++) {
-			if ( gameBoard[i][i] == player1.getTurn() ) {
+			if ( gameBoard[i][i] == player1.getPlayerSymbol()  ) {
 				count ++;
 			}
 		}
+		if( count == 5) {
+			return player1.getPlayerSymbol() ;
+		}
+		else return  PlayerType.FREE;
 	}
+	
+	
 }

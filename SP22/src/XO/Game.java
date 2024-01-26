@@ -39,6 +39,7 @@ public abstract class Game {
 			}
 		}
 		
+		System.out.println("Board is full");
 		return true;
 	}
 	
@@ -49,7 +50,13 @@ public abstract class Game {
 			}
 		}
 	}
-	
-
+	public void setCell(int randomRow, int randomCol, PlayerType turn, Coordinates[] empty) {
+		
+		for (int i = 0; i < 5; i ++) {
+				if ( empty[i].getRow() ==  randomRow && empty[i].getColumn() == randomCol) {
+					gameBoard[randomRow][randomCol] = turn;
+				}
+		}
+	}
 
 }

@@ -6,6 +6,10 @@ package XO;
 public class UserPlayer implements Runnable  {
 
 
+	public UserPlayer(String string, PlayerType o) {
+		
+	}
+
 	public void run() {
 		
 		

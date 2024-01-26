@@ -1,26 +1,25 @@
 package XO;
 
+/* Fany Manevich 206116725
+ * Dmitri podoluk 317059244
+ * https://github.com/FannyManevich/SP2.git
+ */
+
 public class UserGame extends Game {
 
-	@Override
-	public void printBoard() {
-		
-		
-	}
-
-	@Override
+	private PlayerType turn;
+	
+	
 	public PlayerType getTurn() {
-		
-		return null;
+		return turn;
 	}
 
-	@Override
-	int getFreeCells() {
+	public Coordinates[] getFreeCells() {
 		
-		return 0;
+	//	return 0;
 	}
 
-	@Override
+	
 	public boolean getWinner() {
 		
 		return false;

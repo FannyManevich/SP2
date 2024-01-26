@@ -5,7 +5,28 @@ package XO;
  */
 public abstract class Player {
 
-	public Player(PlayerType turn) {
+	private String name;
+	public PlayerType turn;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public PlayerType getTurn() {
+		return turn;
+	}
+
+	public void setTurn(PlayerType turn) {
+		this.turn = turn;
+	}
+	
+	public Player(String name, PlayerType turn) {
 		
+		this.name = name;
+		this.turn = turn;
 	}
 }

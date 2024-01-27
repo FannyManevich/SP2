@@ -15,6 +15,8 @@ public class SelfPlayer extends Player implements Runnable  {
 	
 	public SelfPlayer(String name, PlayerType playerSymbol) {
 		super(name, playerSymbol);	
+		selfGame = new SelfGame();
+		empty = new Coordinates[25];
 		empty = selfGame.getFreeCells();
 	}
 	
@@ -42,6 +44,7 @@ public class SelfPlayer extends Player implements Runnable  {
 				selfGame.printBoard();
 				
 				} catch (InterruptedException e) {
+					System.out.println("Board is full");
 					e.printStackTrace();
 				}
 		}

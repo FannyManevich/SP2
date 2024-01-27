@@ -8,7 +8,7 @@ import java.util.Scanner;
  */
 public class UserPlayer extends Player implements Runnable  {
 
-	UserGame userGame;
+	private UserGame userGame;
 	PlayerType nextTurn;
 	Coordinates[] empty;
 	
@@ -43,47 +43,5 @@ public class UserPlayer extends Player implements Runnable  {
 		}
 	}
 	
-	public PlayerType CheckLeftDiagonal() {
-		int count = 0;
-		for (int i = 0; i < 5; i ++) {
-			if ( userGame.getGameBoard()[i][i] == this.getPlayerSymbol() ) {
-				count ++;
-			}
-		}
-		if( count == 5) {
-			return this.getPlayerSymbol();
-		}
-		else return PlayerType.FREE;
-	}
-	public PlayerType CheckRightDiagonal() {
-		int count = 0;
-		for (int i = 0; i < 5; i ++) {
-			for (int j = 4; j >= 0; j --) {
-				if ( userGame.getGameBoard()[i][i] == this.getPlayerSymbol() ) {
-					count ++;
-				}
-			}
-		}
-		if( count == 5) {
-			return this.getPlayerSymbol();
-		}
-		else return PlayerType.FREE;
-	}
-
-	public PlayerType CheckRow() {
-		int count = 0;
-		
-		for (int i = 0; i < 5; i ++) {
-			if ( userGame.getGameBoard()[i][i] == this.getPlayerSymbol() ) {
-				count ++;
-			}
-		}
-		if( count == 5) {
-			return this.getPlayerSymbol();
-		}
-		else return PlayerType.FREE;
-	}
-	
-	//public PlayerType
 
 }

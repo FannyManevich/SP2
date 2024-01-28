@@ -7,7 +7,12 @@ public abstract class Player {
 
 	private String name;
 	public PlayerType playerSymbol;
-
+	PlayerType thisTurn,nextTurn;
+	public Player(String name, PlayerType playerSymbol) {
+			
+		this.name = name;
+		this.playerSymbol = playerSymbol;
+	}
 	public String getName() {
 		return name;
 	}
@@ -20,13 +25,16 @@ public abstract class Player {
 		return playerSymbol;
 	}
 
-	public void setPlayerSymbol(PlayerType playerSymbol) {
-		this.playerSymbol = playerSymbol;
+
+	public PlayerType getTurn() {
+		return thisTurn;
+	}
+	public PlayerType setNextTurn() {
+		if ( thisTurn == PlayerType.X )
+			nextTurn = PlayerType.O;
+		else nextTurn = PlayerType.X;
+		
+		return nextTurn;
 	}
 	
-	public Player(String name, PlayerType playerSymbol) {
-		
-		this.name = name;
-		this.playerSymbol = playerSymbol;
-	}
 }

@@ -1,5 +1,6 @@
 package XO;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /* Fany Manevich 206116725
@@ -10,38 +11,45 @@ public class UserPlayer extends Player implements Runnable  {
 
 	private UserGame userGame;
 	PlayerType nextTurn;
-	Coordinates[] empty;
+	ArrayList<Coordinates> empty;
+	PlayerType[][] gameBoard;
+	
 	
 	public UserPlayer(String name, PlayerType playerSymbol) {
 		super(name, playerSymbol);
-		empty = userGame.getFreeCells();
+		empty = new ArrayList<Coordinates>();
 	}
 
 	public void run() {
 		
 		Scanner sc = new Scanner(System.in);
+		Coordinates temp = new Coordinates();
 		
 		while( !userGame.isBoardFull()) {
 			
-			if(this.getPlayerSymbol() == userGame.getTurn()) {
+			if(this.getPlayerSymbol() == this.getTurn()) {
+				empty = userGame.getFreeCells();
+				
 				System.out.println("Please enter coordinates cell.");
 				System.out.println("x:");
 				int x = sc.nextInt();
 				System.out.println("y:");
 				int y = sc.nextInt();
 				
-				userGame.setCell(x, y, playerSymbol, empty);
+				temp.setRow(x);
+				temp.setColumn(y);
 				
-				if ( userGame.getTurn() == PlayerType.X )
-					nextTurn = PlayerType.O;
-				else nextTurn = PlayerType.X;
+				if(empty.contains(temp)) {
+					gameBoard[x][y] = this.getPlayerSymbol();
+					this.setNextTurn();
+					empty = userGame.getFreeCells();
+				} else {
+                    System.out.println("Cell is not empty.");
+				}			
 			}
-				
-				
-			
-			sc.close();
 		}
+		System.out.println("Board is full");
+		sc.close();
 	}
-	
 
 }

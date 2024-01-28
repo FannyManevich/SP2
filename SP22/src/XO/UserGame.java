@@ -6,20 +6,26 @@ package XO;
  */
 
 public class UserGame extends Game {
-	
-	PlayerType thisTurn,nextTurn;
-	SelfPlayer selfPlayer;
-	UserPlayer userPlayer;
-	//PlayerType[][] gameBoard;
-	
-	public UserGame(SelfPlayer selfPlayer, UserPlayer userPlayer) {
-		super();
-		this.selfPlayer = selfPlayer;
-		this.userPlayer = userPlayer;
-		thisTurn = selfPlayer.playerSymbol;
-	}
 
-	public PlayerType getTurn() {
-		return thisTurn;
-	}
+	    private SelfPlayer selfPlayer;
+	    private UserPlayer userPlayer;
+	    PlayerType thisTurn,nextTurn;
+
+	    public UserGame(SelfPlayer selfPlayer, UserPlayer userPlayer, PlayerType[][] gameBoard) {
+	        super();
+	        this.selfPlayer = selfPlayer;
+	        this.userPlayer = userPlayer;
+	        resetTurns();
+	        resetBoard();
+	    }
+
+	    private void resetTurns() {
+	         thisTurn = selfPlayer.getPlayerSymbol();
+	         nextTurn = userPlayer.getPlayerSymbol();
+	    }
+
+	    public PlayerType getTurn() {
+	        return thisTurn;
+	    }
+	
 }

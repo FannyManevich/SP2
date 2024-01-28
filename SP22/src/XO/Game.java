@@ -1,20 +1,26 @@
 package XO;
+
+import java.util.ArrayList;
+
 /* Fany Manevich 206116725
  * Dmitri podoluk 317059244
  * https://github.com/FannyManevich/SP2.git
  */
 public abstract class Game {
 	
-	PlayerType[][] gameBoard = new PlayerType[5][5];;
+	PlayerType[][] gameBoard ;
+	ArrayList<Coordinates> empty;
+	
+	public Game() {
+        gameBoard = new PlayerType[5][5];
+        empty = new ArrayList<>();
+        resetBoard();
+    }
 	
 	public PlayerType[][] getGameBoard() {
 		return gameBoard;
 	}
-	
-	public void setGameBoard(PlayerType[][] gameBoard) {
-		resetBoard();
-		this.gameBoard = gameBoard;
-	}
+
 	public abstract PlayerType getTurn();
 	
 	public void printBoard() {
@@ -35,20 +41,19 @@ public abstract class Game {
 		
 	}
 
-	public Coordinates[] getFreeCells() {
+	public ArrayList<Coordinates> getFreeCells() {
 		
-		Coordinates temp;
-		Coordinates[] empty = new Coordinates[25];
+		Coordinates temp = new Coordinates();
 		
 		for (int i = 0; i < 5; i ++) {
 			for (int j = 0; j < 5; j ++) {
 				if ( gameBoard[i][j] == PlayerType.FREE ) {
-					temp = new Coordinates(i, j);
-					empty[i] =  temp;
+					temp.setRow(i);
+					temp.setColumn(j);
+					empty.add(temp);
 				}
 			}
 		}
-		
 		return empty;
 	}
 	
@@ -73,16 +78,7 @@ public abstract class Game {
 		}
 	}
 	
-	public void setCell(int randomRow, int randomCol, PlayerType turn, Coordinates[] empty) {
-		
-		for (int i = 0; i < 5; i ++) {
-				if ( empty[i].getRow() ==  randomRow && empty[i].getColumn() == randomCol) {
-					gameBoard[randomRow][randomCol] = turn;
-				}
-		}
-	}
-	
-	public synchronized boolean checkWinner(Player player) {
+	public  boolean checkWinner(Player player) {
 		
 		PlayerType symbol = player.getPlayerSymbol();
 		
@@ -111,7 +107,7 @@ public abstract class Game {
 		int count = 0;
 		for (int i = 0; i < 5; i ++) {
 			for (int j = 4; j >= 0; j --) {
-				if ( gameBoard[i][i] == symbol ) {
+				if ( gameBoard[i][4 - i] == symbol ) {
 					count ++;
 				}
 		}

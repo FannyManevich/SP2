@@ -7,21 +7,28 @@ package XO;
 
 public class SelfGame extends Game{
 
-	//Game gameBoard;
-	PlayerType thisTurn,nextTurn;
+	private PlayerType thisTurn,nextTurn;
 	private SelfPlayer player1, player2;
 
-	public SelfGame(SelfPlayer player1, SelfPlayer player2) {
+	public SelfGame(SelfPlayer player1, SelfPlayer player2,PlayerType[][] gameBoard1) {
 		this.player1 = player1;
 		this.player2 = player2;
-		thisTurn = player1.playerSymbol;
-		nextTurn = player2.playerSymbol;
-	}
-	public SelfGame() {
-		//gameBoard = ;
+		
+		thisTurn = player1.getPlayerSymbol();
+		nextTurn = player2.getPlayerSymbol();
+		
+		resetBoard();
 	}
 
 	public PlayerType getTurn() {
+		return thisTurn;
+	}
+	
+	public PlayerType setNextTurn() {
+		if ( thisTurn == PlayerType.X )
+			thisTurn = PlayerType.O;
+		else thisTurn = PlayerType.X;
+		
 		return thisTurn;
 	}
 	

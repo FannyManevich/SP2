@@ -1,5 +1,6 @@
 package XO;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /* Fany Manevich 206116725
@@ -9,46 +10,43 @@ import java.util.Random;
 
 public class SelfPlayer extends Player implements Runnable  {
 	
-	public SelfGame selfGame;
-	PlayerType nextTurn;
-	Coordinates[] empty;
+	private SelfGame selfGame;
+    private PlayerType[][] gameBoard;
 	
 	public SelfPlayer(String name, PlayerType playerSymbol) {
-		super(name, playerSymbol);	
-		selfGame = new SelfGame();
-		empty = new Coordinates[25];
-		empty = selfGame.getFreeCells();
+		super(name, playerSymbol);
+
 	}
 	
 	public void run(){
 		
-		int randomRow, randomCol;
+		int x, y ,randomCell;
 		Random random = new Random();
 		
 		while( !selfGame.isBoardFull() ){
 			
 			try {
-				Thread.sleep(500);
-				
-				if(this.getPlayerSymbol() == selfGame.getTurn()) {
-					randomRow = random.nextInt(5);
-					randomCol = random.nextInt(5);
-					selfGame.setCell(randomRow,randomCol,this.playerSymbol, empty);
-					
-					if ( selfGame.getTurn() == PlayerType.X )
-						nextTurn = PlayerType.O;
-					else nextTurn = PlayerType.X;
-				
-				}
-				
-				selfGame.printBoard();
-				
-				} catch (InterruptedException e) {
-					System.out.println("Board is full");
-					e.printStackTrace();
-				}
-		}
-		
-	}
+                Thread.sleep(500);
 
+                if (this.getPlayerSymbol() == selfGame.getTurn()) {
+                    ArrayList<Coordinates> empty = selfGame.getFreeCells();
+
+                    if (!empty.isEmpty()) {
+                        randomCell = random.nextInt(empty.size());
+                        x = empty.get(randomCell).getRow();
+                        y = empty.get(randomCell).getColumn();
+
+                        gameBoard[x][y] = this.getPlayerSymbol();
+                        selfGame.setNextTurn();
+                    }
+                }
+
+                selfGame.printBoard();
+
+            } catch (InterruptedException e) {
+            	System.out.println("Board is full");
+                e.printStackTrace();
+            }
+        }
+    }
 }

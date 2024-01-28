@@ -30,4 +30,7 @@ public class Coordinates{
 		this.row = row;
 		this.column = column;
 	}
+	public Coordinates(){
+		
+	}
 }

@@ -5,36 +5,15 @@ package XO;
  */
 public abstract class Player {
 
-	private String name;
-	public PlayerType playerSymbol;
-	PlayerType thisTurn,nextTurn;
-	public Player(String name, PlayerType playerSymbol) {
-			
+
+	PlayerType turn_;
+	String name;
+	Game board;
+
+	public Player(PlayerType turn_, String name, Game board) {
+		this.turn_ = turn_;
 		this.name = name;
-		this.playerSymbol = playerSymbol;
-	}
-	public String getName() {
-		return name;
+		this.board = board;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public PlayerType getPlayerSymbol() {
-		return playerSymbol;
-	}
-
-
-	public PlayerType getTurn() {
-		return thisTurn;
-	}
-	public PlayerType setNextTurn() {
-		if ( thisTurn == PlayerType.X )
-			nextTurn = PlayerType.O;
-		else nextTurn = PlayerType.X;
-		
-		return nextTurn;
-	}
-	
 }

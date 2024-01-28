@@ -5,5 +5,5 @@ package XO;
  */
 public enum PlayerType {
 	
-	X, O, FREE
+	X, O
 }
